@@ -35,35 +35,57 @@ pip install -r requirements.txt
 ## Data Collection and Preprocessing
 
 1. Download the datasets:
-- Sentiment140: [http://help.sentiment140.com/for-students/](http://help.sentiment140.com/for-students/)
-- SentiStrength: [http://sentistrength.wlv.ac.uk/documentation/TwitterDataset.html](http://sentistrength.wlv.ac.uk/documentation/TwitterDataset.html)
+- [Sentiment140](http://help.sentiment140.com/for-students/)
 
 2. Place the downloaded datasets in the `data` folder and run the preprocessing scripts for each dataset:
 
 ```bash
-python preprocess_sentiment140.py
-python preprocess_senti_strength.py
+python get_sentiment140.py
 ```
 
 This will generate cleaned CSV files for each dataset.
 
 ## Model Training and Evaluation
 
-1. Extract emotional features from the cleaned datasets:
+### Models
 
-```bash
-python extract_features.py
-```
+The models are evaluated using cross-validation and various metrics such as accuracy, precision, recall, and F1-score. The best-performing model is chosen based on its performance on the testing set. The following models are trained and evaluated in this project:
 
-2. Train and evaluate the sentiment classification models:
+- Multinomial Naive Bayes
+- k-Nearest Neighbors
+- Logistic Regression
+- Support Vector Machine (linear kernel)
+- Support Vector Machine (RBF kernel)
+- k-Means clustering
 
-```bash
-python train_and_evaluate.py
-```
+### Evaluation
+
+#### Traditional Model
+
+CountVectorizer: 
+
+| Model                           | Average Score | Accuracy | Precision (0) | Recall (0) | F1-score (0) | Precision (4) | Recall (4) | F1-score (4) |
+| ------------------------------- | ------------- | -------- | ------------- | ---------- | ------------ | ------------- | ---------- | ------------ |
+| Multinomial Naive Bayes         | 0.7458        | 0.75     | 0.72          | 0.79       | 0.75         | 0.77          | 0.71       | 0.74         |
+| k-Nearest Neighbors             | 0.6473        | 0.65     | 0.63          | 0.69       | 0.66         | 0.67          | 0.60       | 0.63         |
+| Logistic Regression             | 0.7535        | 0.75     | 0.76          | 0.73       | 0.74         | 0.74          | 0.78       | 0.76         |
+| Support Vector Machine (linear) | 0.7510        | 0.75     | 0.78          | 0.70       | 0.74         | 0.73          | 0.80       | 0.77         |
+
+TfidfVectorizer:
+
+
+
+#### Sentimental Vector
+
+CountVectorizer: 
+
+
+
+TfidfVectorizer:
 
 ## Contributing
 
-We welcome contributions to this project. If you'd like to contribute, please follow these steps:
+Welcome contributions to this project. If you'd like to contribute, please follow these steps:
 
 1. Fork the repository.
 2. Create a new branch for your changes.
@@ -71,4 +93,4 @@ We welcome contributions to this project. If you'd like to contribute, please fo
 4. Push your changes to your forked repository.
 5. Create a pull request on the original repository.
 
-We will review your pull request and merge your changes if everything looks good. Please ensure your code follows best practices and is properly documented.
+I will review your pull request and merge your changes if everything looks good. Please ensure your code follows best practices and is properly documented.
