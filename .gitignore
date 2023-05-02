@@ -1,0 +1,33 @@
+# .gitignore
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyc
+*.egg-info/
+dist/
+*.egg
+*.log
+logs
+*.sqlite
+
+# Jupyter Notebook artifacts
+.ipynb_checkpoints
+
+# Virtual environment
+venv/
+*.env
+
+# CSV datasets and files
+*.csv
+*.tsv
+
+# Additional files
+.DS_Store
+.idea/
+.vscode/
+*.bak
+*.swp
+*.swo
