@@ -70,10 +70,17 @@ CountVectorizer:
 | k-Nearest Neighbors             | 0.6473        | 0.65     | 0.63          | 0.69       | 0.66         | 0.67          | 0.60       | 0.63         |
 | Logistic Regression             | 0.7535        | 0.75     | 0.76          | 0.73       | 0.74         | 0.74          | 0.78       | 0.76         |
 | Support Vector Machine (linear) | 0.7510        | 0.75     | 0.78          | 0.70       | 0.74         | 0.73          | 0.80       | 0.77         |
+| Support Vector Machine (RBF)    | 0.7161        | 0.72     | 0.71          | 0.73       | 0.72         | 0.73          | 0.71       | 0.72         |
 
 TfidfVectorizer:
 
-
+| Model                           | Average Score | Accuracy | Precision (0) | Recall (0) | F1-score (0) | Precision (4) | Recall (4) | F1-score (4) |
+| ------------------------------- | ------------- | -------- | ------------- | ---------- | ------------ | ------------- | ---------- | ------------ |
+| Multinomial Naive Bayes         | 0.7410        | 0.74     | 0.71          | 0.80       | 0.75         | 0.77          | 0.69       | 0.73         |
+| k-Nearest Neighbors             | 0.6456        | 0.65     | 0.61          | 0.81       | 0.69         | 0.72          | 0.49       | 0.58         |
+| Logistic Regression             | 0.7553        | 0.76     | 0.76          | 0.73       | 0.75         | 0.75          | 0.78       | 0.76         |
+| Support Vector Machine (linear) | 0.7402        | 0.74     | 0.78          | 0.68       | 0.73         | 0.72          | 0.81       | 0.76         |
+| Support Vector Machine (RBF)    | 0.7284        | 0.73     | 0.72          | 0.73       | 0.73         | 0.74          | 0.72       | 0.73         |
 
 #### Sentimental Vector
 
@@ -82,6 +89,8 @@ CountVectorizer:
 
 
 TfidfVectorizer:
+
+
 
 ## Contributing
 

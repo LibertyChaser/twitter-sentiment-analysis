@@ -53,10 +53,10 @@ def train_models(X_train, y_train, X_test, y_test):
     print(classification_report(y_test, y_pred_svc))
 
     # Train and evaluate k-Means clustering model
-    kmeans = KMeans(n_clusters=2, random_state=42, k=5)
-    kmeans_scores = silhouette_score(X_train, kmeans.fit_predict(X_train))
-    print("k-Means clustering silhouette score:", kmeans_scores)
-    kmeans.fit(X_train, y_train)
-    y_pred_kmeans = kmeans.predict(X_test)
-    print("k-Means clustering evaluation:")
-    print(classification_report(y_test, y_pred_kmeans))
+    # kmeans = KMeans(n_clusters=2, random_state=42)
+    # kmeans_scores = silhouette_score(X_train, kmeans.fit_predict(X_train))
+    # print("k-Means clustering silhouette score:", kmeans_scores)
+    # kmeans.fit(X_train, y_train)
+    # y_pred_kmeans = kmeans.predict(X_test)
+    # print("k-Means clustering evaluation:")
+    # print(classification_report(y_test, y_pred_kmeans))

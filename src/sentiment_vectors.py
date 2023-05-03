@@ -1,9 +1,5 @@
-import nltk
 from data_preprocessing.sentiment_vectors_preprocess import preprocess_data
 from model_training_evaluation.training_models import train_models
-
-nltk.download('averaged_perceptron_tagger')
-nltk.download('sentiwordnet')
 
 def main():
     # Preprocess the data

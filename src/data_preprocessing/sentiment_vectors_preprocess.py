@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import pandas as pd
 from nltk import pos_tag
 from nltk.corpus import sentiwordnet as swn
@@ -6,6 +7,11 @@ from nltk.corpus import wordnet as wn
 from nltk.stem import WordNetLemmatizer
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
+import nltk
+
+nltk.download('averaged_perceptron_tagger')
+nltk.download('sentiwordnet')
+nltk.download('wordnet')
 
 def preprocess_data(file_name):
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -19,7 +25,7 @@ def preprocess_data(file_name):
     # Remove rows with NaN values
     df.dropna(inplace=True)
 
-    # Reduce the dataset to 1/10 of its original size
+    # Reduce the dataset to 1/20 of its original size
     df = df.sample(frac=0.05, random_state=42)
 
     # Split the dataset into training and testing sets
@@ -40,7 +46,31 @@ def preprocess_data(file_name):
             return wn.ADV
         else:
             return None
+        
+    # Function to process a single tweet and return its sentiment feature vector
+    # def process_tweet(tweet):
+    #     # Perform POS tagging
+    #     tagged_words = pos_tag(tweet.split())
 
+    #     # Initialize the processed_words list
+    #     processed_words = []
+
+    #     # Iterate over words and their POS tags
+    #     for word, tag in tagged_words:
+    #         # Convert the POS tag to WordNet format
+    #         wn_pos = get_wordnet_pos(tag)
+
+    #         # If the POS tag is valid, proceed with lemmatization
+    #         if wn_pos is not None:
+    #             # Perform lemmatization using the Morphy lookup method
+    #             lemma = lemmatizer.lemmatize(word, pos=wn_pos)
+    #             processed_words.append(lemma)
+    #         else:
+    #             processed_words.append(word)
+
+    #     # Return the processed text
+    #     return " ".join(processed_words)
+    
     # Function to process a single tweet and return its sentiment feature vector
     def process_tweet(tweet):
         # Perform POS tagging
@@ -87,23 +117,17 @@ def preprocess_data(file_name):
         if total_words > 0:
             sentiment_vector[3:] = [count / total_words for count in pos_count]
 
-        # Initialize CountVectorizer and TfidfVectorizer objects
-        count_vectorizer = CountVectorizer()
-        tfidf_vectorizer = TfidfVectorizer()
-
-        # Fit and transform the text data using the CountVectorizer and TfidfVectorizer objects
-        X_train_cv = count_vectorizer.fit_transform(X_train)
-        X_train_tfidf = tfidf_vectorizer.fit_transform(X_train)
-        X_test_cv = count_vectorizer.transform(X_test)
-        X_test_tfidf = tfidf_vectorizer.transform(X_test)
-
-        # Return the processed data
-        return X_train_cv, X_train_tfidf, y_train, X_test_cv, X_test_tfidf, y_test
-
+        return sentiment_vector
+    
+    # Initialize an empty list to store sentiment feature vectors
+    sentiment_vectors_train = []
+    sentiment_vectors_test = []
 
     # Apply the process_tweet function to the training and testing sets
-    X_train = X_train.apply(process_tweet)
-    X_test = X_test.apply(process_tweet)
+    for tweet in X_train:
+        sentiment_vectors_train.append(process_tweet(tweet))
+    for tweet in X_test:
+        sentiment_vectors_test.append(process_tweet(tweet))
 
     # Initialize CountVectorizer and TfidfVectorizer objects
     count_vectorizer = CountVectorizer()
@@ -114,6 +138,16 @@ def preprocess_data(file_name):
     X_train_tfidf = tfidf_vectorizer.fit_transform(X_train)
     X_test_cv = count_vectorizer.transform(X_test)
     X_test_tfidf = tfidf_vectorizer.transform(X_test)
+
+    # Convert the sentiment feature vectors to NumPy arrays
+    sentiment_vectors_train = np.array(sentiment_vectors_train)
+    sentiment_vectors_test = np.array(sentiment_vectors_test)
+
+    # Concatenate the sentiment feature vectors with the CountVectorizer and TfidfVectorizer transformed data
+    X_train_cv = np.hstack((X_train_cv.toarray(), sentiment_vectors_train))
+    X_train_tfidf = np.hstack((X_train_tfidf.toarray(), sentiment_vectors_train))
+    X_test_cv = np.hstack((X_test_cv.toarray(), sentiment_vectors_test))
+    X_test_tfidf = np.hstack((X_test_tfidf.toarray(), sentiment_vectors_test))
 
     # Return the processed data
     return X_train_cv, X_train_tfidf, y_train, X_test_cv, X_test_tfidf, y_test
