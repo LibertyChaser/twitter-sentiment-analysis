@@ -60,7 +60,7 @@ The models are evaluated using cross-validation and various metrics such as accu
 
 ### Evaluation
 
-#### Traditional Model
+#### Without Emotional Feature Vectors
 
 CountVectorizer: 
 
@@ -82,15 +82,27 @@ TfidfVectorizer:
 | Support Vector Machine (linear) | 0.7402        | 0.74     | 0.78          | 0.68       | 0.73         | 0.72          | 0.81       | 0.76         |
 | Support Vector Machine (RBF)    | 0.7284        | 0.73     | 0.72          | 0.73       | 0.73         | 0.74          | 0.72       | 0.73         |
 
-#### Sentimental Vector
+#### With Emotional Feature Vectors
 
 CountVectorizer: 
 
-
+| Model                           | Average Score | Accuracy | Precision (0) | Recall (0) | F1-score (0) | Precision (4) | Recall (4) | F1-score (4) |
+| ------------------------------- | ------------- | -------- | ------------- | ---------- | ------------ | ------------- | ---------- | ------------ |
+| Multinomial Naive Bayes         | 0.7758        | 0.78     | 0.76          | 0.81       | 0.79         | 0.80          | 0.74       | 0.77         |
+| k-Nearest Neighbors             | 0.6873        | 0.69     | 0.65          | 0.72       | 0.68         | 0.71          | 0.64       | 0.67         |
+| Logistic Regression             | 0.7735        | 0.77     | 0.78          | 0.75       | 0.76         | 0.76          | 0.80       | 0.78         |
+| Support Vector Machine (linear) | 0.7710        | 0.77     | 0.80          | 0.72       | 0.76         | 0.75          | 0.82       | 0.79         |
+| Support Vector Machine (RBF)    | 0.7361        | 0.74     | 0.73          | 0.75       | 0.74         | 0.75          | 0.73       | 0.74         |
 
 TfidfVectorizer:
 
-
+| Model                           | Average Score | Accuracy | Precision (0) | Recall (0) | F1-score (0) | Precision (4) | Recall (4) | F1-score (4) |
+| ------------------------------- | ------------- | -------- | ------------- | ---------- | ------------ | ------------- | ---------- | ------------ |
+| Multinomial Naive Bayes         | 0.7698        | 0.77     | 0.74          | 0.83       | 0.78         | 0.80          | 0.72       | 0.76         |
+| k-Nearest Neighbors             | 0.6711        | 0.68     | 0.63          | 0.84       | 0.72         | 0.75          | 0.51       | 0.61         |
+| Logistic Regression             | 0.7753        | 0.78     | 0.79          | 0.76       | 0.78         | 0.77          | 0.80       | 0.79         |
+| Support Vector Machine (linear) | 0.7602        | 0.76     | 0.81          | 0.71       | 0.76         | 0.74          | 0.83       | 0.79         |
+| Support Vector Machine (RBF)    | 0.7484        | 0.75     | 0.75          | 0.76       | 0.76         | 0.76          | 0.74       | 0.75         |
 
 ## Contributing
 
